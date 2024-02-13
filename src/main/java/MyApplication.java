@@ -82,6 +82,7 @@ public class MyApplication {
     public void getAllUsersMenu() {
         String response = controller.getAllUsers();
         System.out.println(response);
+        start();
     }
     public void getAllCars() {
         String response = controller.getAllUsers();
