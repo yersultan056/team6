@@ -6,7 +6,7 @@ public class User {
     private String surname;
     private boolean gender;
     private String rights_category;
-    public User(String name, String surname, boolean gender) {
+    public User(String name, String surname, boolean gender, String rights_category) {
         setName(name);
         setSurname(surname);
         setGender(gender);
