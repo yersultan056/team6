@@ -11,81 +11,81 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class MyApplication {
-    private final UserController controller;
-    private final Scanner scanner;
+    private final UserController userController; // Controller for user-related operations
+    private final Scanner scanner; // Scanner for reading input from console
 
+    // Constructor initializes the application with a UserController
     public MyApplication(UserController controller) {
-        this.controller = controller;
-        scanner = new Scanner(System.in);
+        this.userController = controller;
+        scanner = new Scanner(System.in); // Initialize scanner for input
     }
 
+    // Main loop of the application, displays menu and processes user input
     public void start() {
-        while (true) {
-            System.out.println();
-            System.out.println("Welcome to My Application");
+        while (true) { // Loop until the user chooses to exit
+            System.out.println("\nWelcome to My Application");
             System.out.println("Select option:");
             System.out.println("1. Get all users");
             System.out.println("2. Get user by id");
             System.out.println("3. Create user");
             System.out.println("0. Exit");
-            System.out.println();
             try {
                 System.out.print("Enter option (1-3): ");
-                int option = scanner.nextInt();
-                if (option == 1) {
-                    getAllUsersMenu();
-                } else if (option == 2) {
-                    getUserByIdMenu();
-                } else if (option == 3) {
-                    createUserMenu();
-                } else {
-                    break;
+                int option = scanner.nextInt(); // Read user's choice
+                switch (option) {
+                    case 1:
+                        getAllUsersMenu(); // Handle all users listing
+                        break;
+                    case 2:
+                        getUserByIdMenu(); // Handle fetching a user by ID
+                        break;
+                    case 3:
+                        createUserMenu(); // Handle creating a new user
+                        break;
+                    case 0:
+                        return; // Exit the application
+                    default:
+                        System.out.println("Invalid option, please try again.");
+                        break;
                 }
             } catch (InputMismatchException e) {
-                System.out.println("Input must be integer: " + e);
-                scanner.nextLine(); // to ignore incorrect input
+                System.out.println("Input must be an integer. Please try again.");
+                scanner.nextLine(); // Clear the invalid input
+            } catch (Exception e) {
+                System.out.println("An error occurred: " + e.getMessage());
             }
-            catch (Exception e) {
-                System.out.println(e.getMessage());
-            }
-
             System.out.println("*************************");
         }
     }
 
-
-    public void getAllUsersMenu() {
-        String response = controller.getAllUsers();
+    // Displays all users
+    private void getAllUsersMenu() {
+        String response = userController.getAllUsers();
         System.out.println(response);
-        start();
     }
 
-    public void getUserByIdMenu() {
-        System.out.println("Please enter id");
-
-        int id = scanner.nextInt();
-        String response = controller.getUser(id);
+    // Fetches and displays information for a user by their ID
+    private void getUserByIdMenu() {
+        System.out.println("Please enter an ID:");
+        int id = scanner.nextInt(); // Read the user's ID
+        String response = userController.getUser(id);
         System.out.println(response);
-        IDB db = new PostgresDB();
-        ICarsRepository repo = new CarsRepository(db);
-        CarController controller = new CarController(repo);
-        ChooseCar app = new ChooseCar(controller);
-        app.start();
+        // Proceed to car selection logic (not shown in provided code snippet)
     }
 
-    public void createUserMenu() {
-        System.out.println("Please enter name");
+    // Handles the creation of a new user
+    private void createUserMenu() {
+        System.out.println("Please enter the following details:");
+        System.out.print("Name: ");
         String name = scanner.next();
-        System.out.println("Please enter surname");
+        System.out.print("Surname: ");
         String surname = scanner.next();
-        System.out.println("Please enter gender (male/female)");
+        System.out.print("Gender (male/female): ");
         String gender = scanner.next();
-        System.out.println("Please enter category of rights");
+        System.out.print("Category of rights: ");
         String rights_category = scanner.next();
 
-        String response = controller.createUser(name, surname, gender, rights_category);
+        String response = userController.createUser(name, surname, gender, rights_category);
         System.out.println(response);
     }
-
-
 }
