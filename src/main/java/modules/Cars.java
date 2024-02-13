@@ -1,19 +1,28 @@
 package modules;
 
 public class Cars {
+    private int id;
     private String model;
     private String brand;
-    private int number;
+    private String number;
     private String category;
     private String carClass;
     public Cars(){
 
-    } public Cars(String model, String brand, int number, String category, String carClass) {
+    } public Cars(int id, String model, String brand, String number, String category, String carClass) {
+        this.id = id;
         this.model = model;
         this.brand = brand;
         this.number = number;
         this.category = category;
         this.carClass = carClass;
+    }
+
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id=id;
     }
     public String getModel() {
         return model;
@@ -31,11 +40,11 @@ public class Cars {
         this.brand = brand;
     }
 
-    public int getNumber() {
+    public String getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(String number) {
         this.number = number;
     }
 
@@ -51,13 +60,14 @@ public class Cars {
         return carClass;
     }
 
-    public void setCarClassClass(String carClass) {
+    public void setCarClass(String carClass) {
         this.carClass = carClass;
     }
 
     @Override
     public String toString() {
         return "Cars{" +
+                "id=" + id +
                 "model='" + model + '\'' +
                 ", brand='" + brand + '\'' +
                 ", number=" + number +
