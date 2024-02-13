@@ -1,4 +1,11 @@
 import controllers.UserController;
+import controllers.CarController;
+import data.PostgresDB;
+import data.interfaces.IDB;
+import repositories.UserRepository;
+import repositories.interfaces.IUserRepository;
+import repositories.CarsRepository;
+import repositories.interfaces.ICarsRepository;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -59,6 +66,11 @@ public class MyApplication {
         int id = scanner.nextInt();
         String response = controller.getUser(id);
         System.out.println(response);
+        IDB db = new PostgresDB();
+        ICarsRepository repo = new CarsRepository(db);
+        CarController controller = new CarController(repo);
+        ChooseCar app = new ChooseCar(controller);
+        app.start();
     }
 
     public void createUserMenu() {
