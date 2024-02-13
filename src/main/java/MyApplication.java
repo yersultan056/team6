@@ -23,6 +23,7 @@ public class MyApplication {
                 String rights_category = rs.getString("rights_category");
 
                 User user = new User(id, name, surname, gender, rights_category);
+                usersar.add(user);
             }
         } catch (SQLException e){
             System.out.println("connection error: " + e.getMessage());
