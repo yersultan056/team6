@@ -1,12 +1,20 @@
 package modules;
 
 import java.time.LocalDateTime;
+
 public class Booking {
+    // Unique identifier for the booking
     private int id;
+    // User ID associated with this booking
     private int userId;
+    // Car ID associated with this booking
     private int carId;
+    // Start time of the booking
     private LocalDateTime startTime;
+    // End time of the booking
     private LocalDateTime endTime;
+
+    // Constructor to initialize a new booking
     public Booking(int id, int userId, int carId, LocalDateTime startTime, LocalDateTime endTime) {
         this.id = id;
         this.userId = userId;
@@ -14,6 +22,8 @@ public class Booking {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
+    // Getters and setters for each field
     public int getId() {
         return id;
     }
@@ -54,6 +64,7 @@ public class Booking {
         this.endTime = endTime;
     }
 
+    // Overridden toString method for displaying booking details
     @Override
     public String toString() {
         return "Booking{" +
@@ -65,3 +76,4 @@ public class Booking {
                 '}';
     }
 }
+
