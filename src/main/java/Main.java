@@ -3,7 +3,7 @@ import java.util.ArrayList;
 
 import modules.User;
 
-public class MyApplication {
+public class Main {
     public static void main(String[] args){
         String connectionString = "jdbc:postgresql://localhost:5432/team6";
         ArrayList<User> usersar = new ArrayList<>();
@@ -41,5 +41,5 @@ public class MyApplication {
         for (User user : usersar) {
             System.out.println(user);
         }
-        }
+    }
 }
