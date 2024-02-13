@@ -26,7 +26,7 @@ public class CarsRepository implements ICarsRepository {
 
         try {
             con = db.getConnection();
-            String sql = "SELECT model,brand,number,category,car_class FROM users WHERE car_id=?";
+            String sql = "SELECT model,brand,number,category,car_class FROM cars WHERE car_id=?";
             PreparedStatement st = con.prepareStatement(sql);
 
             st.setInt(1, car_id);
@@ -60,7 +60,7 @@ public class CarsRepository implements ICarsRepository {
 
         try {
             con = db.getConnection();
-            String sql = "SELECT model,brand,number,category,car_class FROM users";
+            String sql = "SELECT model,brand,number,category,car_class FROM cars";
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);
