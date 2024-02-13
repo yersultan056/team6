@@ -4,7 +4,7 @@ public class Users {
     private String surname;
     private boolean gender;
     private String rightsCategory;
-
+// 1
     public int getId() {
         return id;
     }
