@@ -2,13 +2,13 @@ package repositories;
 
 import data.interfaces.IDB;
 import modules.Cars;
-import repositories.interfaces.IUserRepository;
+import repositories.interfaces.ICarsRepository;
 
 import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class CarsRepository implements IUserRepository {
+public class CarsRepository implements ICarsRepository {
     private final IDB db;  // Dependency Injection
 
     public CarsRepository(IDB db) {
@@ -17,27 +17,22 @@ public class CarsRepository implements IUserRepository {
 
     @Override
     public Cars getCar(int car_id) {
-        return null;
-    }
-
-    @Override
-    public Cars getCar(int car_id) {
         Connection con = null;
 
         try {
             con = db.getConnection();
-            String sql = "SELECT car_id,model,brand,number,category,carClass FROM cars WHERE id=?";
+            String sql = "SELECT model,brand,number,category,carClass FROM users WHERE car_id=?";
             PreparedStatement st = con.prepareStatement(sql);
 
-            st.setInt(1, car_id);
+            st.setInt(1, id);
 
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return new Cars(rs.getInt("car_id"),
-                        rs.getString("model"),
-                        rs.getString("brand"),
-                        rs.getString("number"),
-                        rs.getString("category"));
+                return new User(rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("surname"),
+                        rs.getBoolean("gender"),
+                        rs.getString("rights_category"));
             }
         } catch (SQLException e) {
             System.out.println("sql error: " + e.getMessage());
@@ -54,12 +49,7 @@ public class CarsRepository implements IUserRepository {
     }
 
     @Override
-    public List<Cars> getAllCars() {
-        return null;
-    }
-
-    @Override
-    public List<Cars> getAllCars() {
+    public List<User> getAllUsers() {
         Connection con = null;
 
         try {
