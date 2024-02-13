@@ -5,10 +5,10 @@ import repositories.interfaces.ICarsRepository;
 
 import java.util.List;
 
-public class CarsController {
+public class CarController {
     private final ICarsRepository repo;
 
-    public CarsController(ICarsRepository repo) {
+    public CarController(ICarsRepository repo) {
         this.repo = repo;
     }
 

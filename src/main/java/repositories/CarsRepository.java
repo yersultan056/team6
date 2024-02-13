@@ -16,23 +16,29 @@ public class CarsRepository implements ICarsRepository {
     }
 
     @Override
+    public boolean createCar(Cars car) {
+        return false;
+    }
+
+    @Override
     public Cars getCar(int car_id) {
         Connection con = null;
 
         try {
             con = db.getConnection();
-            String sql = "SELECT model,brand,number,category,carClass FROM users WHERE car_id=?";
+            String sql = "SELECT model,brand,number,category,car_class FROM users WHERE car_id=?";
             PreparedStatement st = con.prepareStatement(sql);
 
-            st.setInt(1, id);
+            st.setInt(1, car_id);
 
             ResultSet rs = st.executeQuery();
             if (rs.next()) {
-                return new User(rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getBoolean("gender"),
-                        rs.getString("rights_category"));
+                return new Cars(rs.getInt("car_id"),
+                        rs.getString("model"),
+                        rs.getString("brand"),
+                        rs.getString("number"),
+                        rs.getString("category"),
+                        rs.getString("car_class"));
             }
         } catch (SQLException e) {
             System.out.println("sql error: " + e.getMessage());
@@ -49,27 +55,28 @@ public class CarsRepository implements ICarsRepository {
     }
 
     @Override
-    public List<User> getAllUsers() {
+    public List<Cars> getAllCars() {
         Connection con = null;
 
         try {
             con = db.getConnection();
-            String sql = "SELECT id,name,surname,gender,rights_category FROM users";
+            String sql = "SELECT model,brand,number,category,car_class FROM users";
             Statement st = con.createStatement();
 
             ResultSet rs = st.executeQuery(sql);
-            List<User> users = new LinkedList<>();
+            List<Cars> cars = new LinkedList<>();
             while (rs.next()) {
-                User user = new User(rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getString("surname"),
-                        rs.getBoolean("gender"),
-                        rs.getString("rights_category"));
+                Cars car = new Cars(rs.getInt("car_id"),
+                        rs.getString("model"),
+                        rs.getString("brand"),
+                        rs.getString("number"),
+                        rs.getString("category"),
+                        rs.getString("car_class"));
 
-                users.add(user);
+                cars.add(car);
             }
 
-            return users;
+            return cars;
         } catch (SQLException e) {
             System.out.println("sql error: " + e.getMessage());
         } finally {

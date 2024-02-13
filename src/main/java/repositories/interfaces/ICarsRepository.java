@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface ICarsRepository {
     boolean createCar(Cars car);
-    Cars getUser(int car_id);
+    Cars getCar(int car_id);
     List<Cars> getAllCars();
 }
