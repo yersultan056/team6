@@ -13,7 +13,7 @@ public class CarController {
     }
 
     public String getCar(int car_id) {
-        Cars car = repo.(car_id);
+        Cars car = repo.getCar(car_id);
         return (car == null ? "User was not found!" : car.toString());
     }
 
