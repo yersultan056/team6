@@ -15,7 +15,7 @@ public class CarRentalService {
     public List<Cars> searchAvailableCarsForUser(User user) {
         String userRightsCategory = user.getRightsCategory();
         return cars.stream()
-                .filter(car -> car.getCategory().equalsIgnoreCase(userRightsCategory) && isCarAvailable(car.getId()))
+                .filter(car -> car.getCategory().equalsIgnoreCase(userRightsCategory) && isCarAvailable(car.getCar_id()))
                 .collect(Collectors.toList());
     }
 
