@@ -70,6 +70,8 @@ public class MyApplication {
         int id = scanner.nextInt(); // Read the user's ID
         String response = userController.getUser(id);
         System.out.println(response);
+        Main cr = new Main();
+        cr.selectCars(id);
         // Proceed to car selection logic (not shown in provided code snippet)
     }
 

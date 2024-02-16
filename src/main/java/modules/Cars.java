@@ -25,12 +25,8 @@ public class Cars {
 
     // Constructor with car_id, used when retrieving car details from the database
     public Cars(int car_id, String model, String brand, String number, String category, String carClass) {
-        this.model = model;
-        this.brand = brand;
-        this.number = number;
-        this.category = category;
-        this.carClass = carClass;
-        setCar_id(car_id); // Sets the car's ID
+        this(model, brand, number, category, carClass); // Calls the first constructor to set name, surname, gender, and rights_category
+        setCar_id(car_id); // Additionally sets the user's id
     }
 
     // Getters and setters for all fields

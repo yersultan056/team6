@@ -3,12 +3,23 @@ import java.util.ArrayList;
 
 import modules.User;
 import controllers.UserController;
+import controllers.CarController;
 import data.PostgresDB;
 import data.interfaces.IDB;
+import repositories.CarsRepository;
 import repositories.UserRepository;
 import repositories.interfaces.IUserRepository;
+import repositories.interfaces.ICarsRepository;
 
 public class Main {
+    public void selectCars(int id){
+        IDB db2 = new PostgresDB();
+        ICarsRepository repo2 = new CarsRepository(db2);
+        CarController controller2 = new CarController(repo2);
+        ChooseCar app2 = new ChooseCar(controller2);
+        app2.start();
+    }
+
     public static void main(String[] args){
         // Database connection string for PostgreSQL
         String connectionString = "jdbc:postgresql://localhost:5432/team6";
@@ -64,6 +75,8 @@ public class Main {
         UserController controller = new UserController(repo); // User controller
         MyApplication app = new MyApplication(controller); // Application instance
         app.start(); // Start the application
+
+
     }
 }
 
