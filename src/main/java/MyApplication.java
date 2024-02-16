@@ -8,6 +8,7 @@ import repositories.CarsRepository;
 import repositories.interfaces.ICarsRepository;
 
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class MyApplication {
@@ -70,8 +71,11 @@ public class MyApplication {
         int id = scanner.nextInt(); // Read the user's ID
         String response = userController.getUser(id);
         System.out.println(response);
-        Main cr = new Main();
-        cr.selectCars(id);
+        if (!Objects.equals(response, "User was not found!")){
+            Main cr = new Main();
+            cr.selectCars(id);
+        }
+
         // Proceed to car selection logic (not shown in provided code snippet)
     }
 

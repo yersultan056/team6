@@ -1,6 +1,7 @@
 import controllers.CarController;
 
 import java.util.InputMismatchException;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class ChooseCar {
@@ -12,25 +13,22 @@ public class ChooseCar {
         scanner = new Scanner(System.in);
     }
 
-    public void start() {
+    public void start(int id) {
         while (true) {
             System.out.println();
             System.out.println("Here you can see the cars.");
             System.out.println("Select option:");
             System.out.println("1. Get all cars");
             System.out.println("2. Get car by id");
-            System.out.println("3. Book car");
             System.out.println("0. Exit");
             System.out.println();
             try {
-                System.out.print("Enter option (1-3): ");
+                System.out.print("Enter option (1-2): ");
                 int option = scanner.nextInt();
                 if (option == 1) {
                     getAllCarsMenu();
                 } else if (option == 2) {
-                    getCarByIdMenu();
-                } else if (option == 3) {
-                    System.out.println("---");
+                    getCarByIdMenu(id);
                 } else {
                     break;
                 }
@@ -50,14 +48,18 @@ public class ChooseCar {
     public void getAllCarsMenu() {
         String response = controller.getAllCars();
         System.out.println(response);
-        start();
     }
 
-    public void getCarByIdMenu() {
+    public void getCarByIdMenu(int id) {
         System.out.println("Please enter id");
 
         int car_id = scanner.nextInt();
         String response = controller.getCar(car_id);
-        System.out.println(response);
+        System.out.println(response + '\n' + "Wanna book this car? (Yes/No)");
+        String book = scanner.next();
+        if (Objects.equals(book, "Yes")){
+            Main bk = new Main();
+            bk.bookCar(id, car_id);
+        }
     }
 }

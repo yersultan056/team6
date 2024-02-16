@@ -17,7 +17,11 @@ public class Main {
         ICarsRepository repo2 = new CarsRepository(db2);
         CarController controller2 = new CarController(repo2);
         ChooseCar app2 = new ChooseCar(controller2);
-        app2.start();
+        app2.start(id);
+    }
+
+    public void bookCar(int user_id, int car_id){
+
     }
 
     public static void main(String[] args){
